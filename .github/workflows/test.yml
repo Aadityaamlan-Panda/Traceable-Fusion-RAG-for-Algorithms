@@ -25,5 +25,4 @@ jobs:
         env:
           PYTHONPATH: ${{ github.workspace }}
           GROQ_API_KEY: "fake-groq-key-for-testing"
-          COHERE_API_KEY: "fake-cohere-key-for-testing"
-          ANONYMIZED_TELEMETRY: "False" 
+          COHERE_API_KEY: "fake-cohere-key-for-testing" 

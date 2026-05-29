@@ -3,6 +3,12 @@
 CONCEPT: Centralised config prevents hardcoded values scattered everywhere.
 Using Pydantic's BaseSettings auto-reads from .env files.
 """
+import os
+# Disable ChromaDB's PostHog telemetry before ChromaDB is imported anywhere.
+# Cannot go in .env — Pydantic Settings uses extra="forbid" and rejects
+# unknown keys. Setting via os.environ bypasses Pydantic entirely.
+os.environ.setdefault("ANONYMIZED_TELEMETRY", "False")
+
 from pydantic_settings import BaseSettings
 from pathlib import Path
 
