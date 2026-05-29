@@ -1,6 +1,10 @@
 # Traceable Fusion RAG for Algorithms
 
 A Retrieval-Augmented Generation (RAG) system for querying algorithm implementations across multiple programming languages. Ask natural-language questions and get answers grounded in real, curated source code — with full transparency into every pipeline step.
+<p align="center">
+  <img src="images/1.png" alt="Default Page">
+</p>
+
 
 ---
 
@@ -37,6 +41,11 @@ A Retrieval-Augmented Generation (RAG) system for querying algorithm implementat
 
 The system ingests 6 open-source algorithm repositories (~1 GB of C++, Python, Java, and Markdown), stores them in a ChromaDB vector store, and at query time runs a hybrid BM25 + dense retrieval pipeline, reranks with Cohere, and generates answers with Groq (Llama 3.3 70B) with a Cohere Command A+ fallback.
 
+<img src="images/2.png" alt="query">
+<img src="images/3.png" alt="query">
+<img src="images/4.png" alt="query">
+<img src="images/5.png" alt="query">
+<img src="images/6.png" alt="query">
 ---
 
 ## Architecture
