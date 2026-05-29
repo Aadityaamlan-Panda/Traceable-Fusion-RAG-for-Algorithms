@@ -46,40 +46,40 @@ User Query
     │
     ▼
 ┌─────────────────────────────────────────────────────────┐
-│  Query Transformer  (query_transformer.py)                                                  │
-│  Expands / rephrases the query for better recall                                           │
+│  Query Transformer  (query_transformer.py)              │
+│  Expands / rephrases the query for better recall        │
 └───────────────────────┬─────────────────────────────────┘
                         │
           ┌─────────────┴──────────────┐
-          ▼                                                ▼
-  Dense Retrieval                              BM25 Retrieval
+          ▼                            ▼
+  Dense Retrieval               BM25 Retrieval
   (ChromaDB + Cohere            (rank-bm25, keyword
-   embeddings)                                        exact match)
-          │                                                 │
+   embeddings)                   exact match)
+          │                            │
           └─────────────┬──────────────┘
-                                  ▼
-                      Reciprocal Rank Fusion (RRF)
-                Merges both ranked lists by position
-                                 │
-                                 ▼
+                        ▼
+           Reciprocal Rank Fusion (RRF)
+           Merges both ranked lists by position
+                        │
+                        ▼
              Cohere Reranker (cross-encoder)
              Rescores top-N with full attention
-                                 │
-                                 ▼
+                        │
+                        ▼
           ┌─────────────────────────────┐
-          │  Confidence Gate                                   │
-          │  (guardrails/confidence.py)                 │
-          │  Score < 0.25 → REFUSE                        │
+          │  Confidence Gate            │
+          │  (guardrails/confidence.py) │
+          │  Score < 0.25 → REFUSE      │
           └────────────┬────────────────┘
-                                 │
+                       │
                        ▼
           ┌────────────────────────────┐
-          │  LLM Generation                                  │
-          │  Primary:  Groq 70B                             │
-          │  Fallback: Cohere Cmd A+                  │
+          │  LLM Generation            │
+          │  Primary:  Groq 70B        │
+          │  Fallback: Cohere Cmd A+   │
           └────────────┬───────────────┘
-                                 │
-                                 ▼
+                       │
+                       ▼
           Structured JSON Answer
           { answer, source_files,
             confidence_note, cpp_snippet }
