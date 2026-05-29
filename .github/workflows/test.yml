@@ -16,6 +16,5 @@ jobs:
       - run: pytest tests/unit/ tests/integration/ -v --cov=src
         env:
           # No real API keys in CI — mocks handle this
-          env:
-            GROQ_API_KEY: "fake-groq-key-for-testing"
-            COHERE_API_KEY: "fake-cohere-key-for-testing"
+          GROQ_API_KEY: "fake-groq-key-for-testing"
+          COHERE_API_KEY: "fake-cohere-key-for-testing"
