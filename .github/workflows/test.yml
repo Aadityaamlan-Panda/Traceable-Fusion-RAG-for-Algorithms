@@ -8,13 +8,20 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: pip install -r requirements.txt
-      - run: pip install pytest pytest-cov pytest-asyncio
-      - run: pytest tests/unit/ tests/integration/ -v --cov=src
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Install package in editable mode
+        # Makes `src` importable as a package — fixes ModuleNotFoundError
+        run: pip install -e .
+
+      - name: Run unit and integration tests
+        run: pytest tests/unit/ tests/integration/ -v --cov=src
         env:
-          # No real API keys in CI — mocks handle this
           GROQ_API_KEY: "fake-groq-key-for-testing"
           COHERE_API_KEY: "fake-cohere-key-for-testing"
